@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split, KFold, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Lasso
 
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.metrics import mean_absolute_error, r2_score, root_mean_squared_error
 
 path = '../resources/Datos_Etapa_1_csv.csv'
 with open(path, 'r') as file:
@@ -60,7 +60,7 @@ list(zip(x_train_lasso.columns, mejor_modelo_lasso.coef_))
 #predicciones
 y_pred_lasso = mejor_modelo_lasso.predict(x_test_lasso)
 #manejor de errores
-rmse_lasso = mean_squared_error(y_test_lasso, y_pred_lasso, squared = False)
+rmse_lasso = root_mean_squared_error(y_test_lasso, y_pred_lasso)
 mae_lasso = mean_absolute_error(y_test_lasso, y_pred_lasso)
 r2_lasso = r2_score(y_test_lasso, y_pred_lasso)
 

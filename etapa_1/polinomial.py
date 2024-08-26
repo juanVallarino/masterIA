@@ -5,7 +5,7 @@ from sklearn.preprocessing import PolynomialFeatures, RobustScaler
 
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.metrics import root_mean_squared_error, mean_absolute_error, r2_score
 
 path = '../resources/Datos_Etapa_1_csv.csv'
 with open(path, 'r') as file:
@@ -50,7 +50,7 @@ mejor_modelo_pol = grid_pol.best_estimator_
 #prediciones
 y_pred_pol = mejor_modelo_pol.predict(x_test_pol)
 #manejo de errores
-rmse_pol = mean_squared_error(y_test_pol, y_pred_pol, squared = False)
+rmse_pol = root_mean_squared_error(y_test_pol, y_pred_pol)
 mae_pol = mean_absolute_error(y_test_pol, y_pred_pol)
 r2_pol = r2_score(y_test_pol, y_pred_pol)
 print(y_pred_pol)
