@@ -1,13 +1,13 @@
 import pandas as pd
-import os
+
 from sklearn.model_selection import train_test_split, KFold, GridSearchCV
-from sklearn.preprocessing import StandardScaler, PolynomialFeatures, RobustScaler
-from sklearn.linear_model import Lasso
+from sklearn.preprocessing import PolynomialFeatures, RobustScaler
+
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-path = 'C:/Users/PC/Desktop/Master_IA/Principios_Machine_Learning/Datos_Etapa_1_csv.csv'
+path = '../resources/Datos_Etapa_1_csv.csv'
 with open(path, 'r') as file:
     content = file.read()
 
@@ -21,7 +21,9 @@ data_original = pd.read_csv(path, sep=',')
 data_copy = data_original.copy()
 print(data_copy.shape)
 data_copy.head()
-data_copy=data_copy.drop(['season','weathersit','time_of_day'], axis=1)
+data_copy['season'] = data_copy['season'].astype('category').cat.codes
+data_copy['weathersit'] = data_copy['weathersit'].astype('category').cat.codes
+data_copy['time_of_day'] = data_copy['time_of_day'].astype('category').cat.codes
 print(data_copy.shape)
 data_copy.head()
 data_copy.isna().sum()
